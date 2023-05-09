@@ -1,0 +1,223 @@
+
+package student;
+public class Student {
+	int no;
+	String name;
+	int year;
+	
+	String major;
+	
+	Student(int no,String name,int year,String major){
+		this.no = no;
+		this.name= name;
+		this.year=year;
+		this.major=major;
+	}
+	
+	public void study() {
+		System.out.println("Student "+name+" is currently studying");
+	}
+	public void register() {
+		System.out.println("Student "+name+" registered");
+	}
+
+	@Override
+	public String toString() {
+		return "Student [no=" + no + ", name=" + name + ", year=" + year + ", major=" + major + "]";
+	}
+}
+package student;
+
+public class VocationalStudent extends Student {
+
+	VocationalStudent(int no, String name, int year,String major) {
+		super(no, name, year, major);
+	}
+	@Override
+	public void study(){
+		System.out.println("Vocational Student"+name+" is currently studying on vocational research.");
+}
+	@Override
+	public void register() {
+		System.out.println("Vocational Student "+name+" is registered");
+	}
+	@Override
+	public String toString() {
+		return "VocationalStudent [no=" + no + ", name=" + name + ", year=" + year + ", major="
+				+ major + "]";
+	}
+}
+package student;
+
+public class UndergraduateStudent extends Student {
+	String minor;
+	UndergraduateStudent(int no, String name, int year,String major,String minor) {
+		super(no, name, year, major);
+		this.minor = minor;
+	}
+	@Override
+	public void study() {
+		System.out.println("Undergraduate Student "+name+" is studying for the finals");
+	}
+	@Override
+	public void register() {
+		System.out.println("Undergraduate Student "+name+" is registered.");
+	}
+
+	@Override
+	public String toString() {
+		return "UndergraduateStudent [minor=" + minor + ", no=" + no + ", name=" + name + ", year=" + year + ", major=" + major + "]";
+	}
+}
+package student;
+
+public class GraduateStudent extends Student {
+	String advisor;
+	String thesis;
+	
+	GraduateStudent(int no, String name, int year, String major,String advisor,String thesis) {
+		super(no, name, year, major);
+		this.advisor=advisor;
+		this.thesis=thesis;
+	}
+	@Override
+	public void study() {
+		System.out.println("Graduate Student "+name+" is currently studying on the thesis.");
+	}
+	@Override
+	public void register() {
+		System.out.println("Graduate Student "+name+" is registered.");
+	}
+	public void writeThesis() {
+		System.out.println("Graduate Student "+name+" is writing on the thesis.");
+	}
+	public void meetWithAdvisor() {
+		System.out.println("Graduate Student "+name+" is meeting with her/his advisor");
+	}
+	@Override
+	public String toString() {
+		return "GraduateStudent [advisor=" + advisor + ", thesis=" + thesis + ", no=" + no + ", name=" + name
+				+ ", year=" + year + ", major=" + major + "]";
+	}
+}
+package student;
+
+public class MasterStudent extends GraduateStudent{
+
+	MasterStudent(int no, String name, int year, String major, String advisor, String thesis) {
+		super(no, name, year, major, advisor, thesis);
+	}
+	@Override
+	public void study() {
+		System.out.println("Master Student "+name+" is studying on the thesis.");
+	}
+	@Override
+	public void register() {
+		System.out.println("Master Student "+name+" is registered.");
+	}
+	@Override
+	public void writeThesis() {
+		System.out.println("Master Student "+name+" is writing on the thesis.");
+	}
+	@Override
+	public void meetWithAdvisor() {
+		System.out.println("Master Student "+name+" is meeting with her/his advisor");
+	}
+	@Override
+	public String toString() {
+		return "MasterStudent [advisor=" + advisor + ", thesis=" + thesis + ", no=" + no + ", name=" + name + ", year="
+				+ year + ", major=" + major + "]";
+	}
+}
+package student;
+
+public class PhdStudent extends GraduateStudent {
+	boolean qualifyingExamTaken;
+	PhdStudent(int no, String name, int year, String major, String advisor, String thesis,boolean qualifyingExamTaken) {
+		super(no, name, year, major, advisor, thesis);
+		this.qualifyingExamTaken= qualifyingExamTaken;
+	}
+	@Override
+	public void study() {
+		System.out.println("Phd Student "+name+" is studying on the thesis.");
+	}
+	@Override
+	public void register() {
+		System.out.println("Phd Student "+name+" is registered.");
+	}
+	@Override
+	public void writeThesis() {
+		System.out.println("Phd Student "+name+" is writing on the thesis.");
+	}
+	@Override
+	public void meetWithAdvisor() {
+		System.out.println("Phd Student "+name+" is meeting with her/his advisor");
+	}
+	public void writePaper() {
+		System.out.println("Phd Student "+name+" is writing a paper.");
+	}
+	@Override
+	public String toString() {
+		return "PhdStudent [qualifyingExamTaken=" + qualifyingExamTaken + ", advisor=" + advisor + ", thesis=" + thesis
+				+ ", no=" + no + ", name=" + name + ", year=" + year + ", major=" + major + "]";
+	}
+}
+package student;
+
+public class RegistrationOffice {
+	
+	public Student getAStudent() {
+		Student s = null;
+		
+		int i = (int) (6 * Math.random());
+		
+		switch (i) {
+		case 0:
+			s = new Student(1650, "Furkan", 1, "Computer Engineer");
+			break;
+		case 1:
+			s = new VocationalStudent(2246, "Ahmet", 2,"Information technologies");
+			break;
+		case 2:
+			s = new UndergraduateStudent(4873, "Mehmet", 3, "Software Engineer","Programming");
+			break;
+		case 3:
+			s = new GraduateStudent(5149, "Ismail", 5, "Computer Engineer","Advisor: Ahmet Arslan","History of Electronic Devices");
+			break;
+		case 4:
+			s = new MasterStudent(6789, "Salih", 7, "Software Engineer","Advisor: Mehmet Kaplan","Future of AI");
+			break;
+		case 5:
+			s = new PhdStudent(7327, "Fatma", 6,"Software Engineer","Advisor: Akin Kaldiroglu","The power of technology in our future",true);
+			break;
+		}
+		return s;
+	
+	}
+	public void registerStudent(Student student) {
+		student.register();
+		if(student instanceof MasterStudent master) {
+			System.out.println(master);
+		}else if(student instanceof PhdStudent phd) {
+			phd.writePaper();
+			System.out.println(phd);
+		}else if(student instanceof GraduateStudent graduate) {
+			System.out.println(graduate);
+		}else if(student instanceof UndergraduateStudent undergraduate) {
+			System.out.println(undergraduate.toString());
+		}else if(student instanceof VocationalStudent vocational) {
+			System.out.println(vocational.toString());
+		}else 
+			System.out.println("Student is registered");	
+	}
+}
+package student;
+
+public class Test {
+
+	public static void main(String[] args) {
+		RegistrationOffice office = new RegistrationOffice();
+		Student s1 = office.getAStudent();
+		office.registerStudent(s1);
+	}
+}
