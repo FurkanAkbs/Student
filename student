@@ -1,6 +1,6 @@
 
 package student;
-public class Student {
+public abstract class Student {
 	int no;
 	String name;
 	int year;
@@ -14,12 +14,8 @@ public class Student {
 		this.major=major;
 	}
 	
-	public void study() {
-		System.out.println("Student "+name+" is currently studying");
-	}
-	public void register() {
-		System.out.println("Student "+name+" registered");
-	}
+	public abstract void study();
+	public abstract void register();
 
 	@Override
 	public String toString() {
@@ -41,11 +37,6 @@ public class VocationalStudent extends Student {
 	public void register() {
 		System.out.println("Vocational Student "+name+" is registered");
 	}
-	@Override
-	public String toString() {
-		return "VocationalStudent [no=" + no + ", name=" + name + ", year=" + year + ", major="
-				+ major + "]";
-	}
 }
 package student;
 
@@ -62,11 +53,6 @@ public class UndergraduateStudent extends Student {
 	@Override
 	public void register() {
 		System.out.println("Undergraduate Student "+name+" is registered.");
-	}
-
-	@Override
-	public String toString() {
-		return "UndergraduateStudent [minor=" + minor + ", no=" + no + ", name=" + name + ", year=" + year + ", major=" + major + "]";
 	}
 }
 package student;
@@ -123,11 +109,6 @@ public class MasterStudent extends GraduateStudent{
 	public void meetWithAdvisor() {
 		System.out.println("Master Student "+name+" is meeting with her/his advisor");
 	}
-	@Override
-	public String toString() {
-		return "MasterStudent [advisor=" + advisor + ", thesis=" + thesis + ", no=" + no + ", name=" + name + ", year="
-				+ year + ", major=" + major + "]";
-	}
 }
 package student;
 
@@ -169,25 +150,22 @@ public class RegistrationOffice {
 	public Student getAStudent() {
 		Student s = null;
 		
-		int i = (int) (6 * Math.random());
+		int i = (int) (5 * Math.random());
 		
 		switch (i) {
 		case 0:
-			s = new Student(1650, "Furkan", 1, "Computer Engineer");
-			break;
-		case 1:
 			s = new VocationalStudent(2246, "Ahmet", 2,"Information technologies");
 			break;
-		case 2:
+		case 1:
 			s = new UndergraduateStudent(4873, "Mehmet", 3, "Software Engineer","Programming");
 			break;
-		case 3:
+		case 2:
 			s = new GraduateStudent(5149, "Ismail", 5, "Computer Engineer","Advisor: Ahmet Arslan","History of Electronic Devices");
 			break;
-		case 4:
+		case 3:
 			s = new MasterStudent(6789, "Salih", 7, "Software Engineer","Advisor: Mehmet Kaplan","Future of AI");
 			break;
-		case 5:
+		case 4:
 			s = new PhdStudent(7327, "Fatma", 6,"Software Engineer","Advisor: Akin Kaldiroglu","The power of technology in our future",true);
 			break;
 		}
@@ -207,9 +185,7 @@ public class RegistrationOffice {
 			System.out.println(undergraduate.toString());
 		}else if(student instanceof VocationalStudent vocational) {
 			System.out.println(vocational.toString());
-		}else 
-			System.out.println("Student is registered");	
-	}
+		}
 }
 package student;
 
